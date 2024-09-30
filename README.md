@@ -15,3 +15,6 @@
      <Button>Login</Button>
    </SignInButton>;
    ```
+
+## Resources
+  `untitledui` for logo 
