@@ -16,5 +16,8 @@
    </SignInButton>;
    ```
 
+6. `react-icon` for Icons
+
 ## Resources
-  `untitledui` for logo 
+
+`untitledui` for logo

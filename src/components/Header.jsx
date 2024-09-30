@@ -9,10 +9,10 @@ const Header = () => {
     // Header Container
     <div className="mx-auto flex items-center justify-between shadow-sm p-6">
       {/* logo */}
-      <img src="/logo.svg" alt="" width={48} height={48} />
+      <img src="/logo.svg" alt="" width={36} height={36} />
 
       {/* Nav  */}
-      <ul className="hidden lg:flex gap-16 ">
+      <ul className="hidden md:flex gap-16 ">
         <li className="font-medium hover:scale-105 transition-all cursor-pointer hover:text-primary">
           Home
         </li>
