@@ -1,10 +1,11 @@
-import React from "react";
 import Data from "@/shared/data";
 const Category = () => {
   return (
     <div className="mt-40 mb-36">
+      {/* Category header */}
       <h2 className="font-bold text-xl text-center mb-6">Browse By Type</h2>
 
+      {/* Category Grid: default 3 || sm: 4 || md: 6 || lg: 9 */}
       <div className="mx-auto grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-6 px-20">
         {Data.Category.map((category, index) => (
           <div
