@@ -22,3 +22,4 @@
 
 `untitledui` for logo
 `flaticon` for icons || url
+`hyperui.dev/` for tailwindcss CSS UI components

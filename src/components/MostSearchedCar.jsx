@@ -19,7 +19,6 @@ const MostSearchedCar = () => {
       </h2>
 
       {/* Car Items in Carousel */}
-
       <Carousel className="mx-auto px-6">
         <CarouselContent>
           {FakeData.carList.map((car, index) => (
