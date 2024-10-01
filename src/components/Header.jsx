@@ -7,25 +7,27 @@ const Header = () => {
 
   return (
     // Header Container
-    <div className="mx-auto flex items-center justify-between shadow-sm p-6">
+    <div className="mx-auto flex items-center  shadow-sm p-6">
       {/* logo */}
       <img src="/logo.svg" alt="" width={36} height={36} />
 
       {/* Nav  */}
-      <ul className="hidden md:flex gap-16 ">
-        <li className="font-medium hover:scale-105 transition-all cursor-pointer hover:text-primary">
-          Home
-        </li>
-        <li className="font-medium hover:scale-105 transition-all cursor-pointer hover:text-primary">
-          Search
-        </li>
-        <li className="font-medium hover:scale-105 transition-all cursor-pointer hover:text-primary">
-          New
-        </li>
-        <li className="font-medium hover:scale-105 transition-all cursor-pointer hover:text-primary">
-          Preowned
-        </li>
-      </ul>
+      <nav className="flex justify-center mx-auto">
+        <ul className="hidden md:flex  gap-16  ">
+          <li className="font-medium hover:scale-105 transition-all cursor-pointer hover:text-primary">
+            Home
+          </li>
+          <li className="font-medium hover:scale-105 transition-all cursor-pointer hover:text-primary">
+            Search
+          </li>
+          <li className="font-medium hover:scale-105 transition-all cursor-pointer hover:text-primary">
+            New
+          </li>
+          <li className="font-medium hover:scale-105 transition-all cursor-pointer hover:text-primary">
+            Preowned
+          </li>
+        </ul>
+      </nav>
 
       {/* if signedIn: userlogo and button, else: just button */}
       {isSignedIn ? (
