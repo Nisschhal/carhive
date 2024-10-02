@@ -42,7 +42,7 @@ const AddList = () => {
               {carData.carDetails.map((item, index) => {
                 return (
                   <div key={index}>
-                    <label className="text-sm">
+                    <label className="text-sm md:pl-2">
                       {item.label}
                       {item.required && <span className="text-red-600">*</span>}
                     </label>
@@ -53,6 +53,7 @@ const AddList = () => {
                         placeholder={`Enter ${item.label} ${
                           item.fieldType == "number" ? "(Number)" : ""
                         }`}
+                        className="rounded-md md:rounded-full"
                       />
                     ) : item.fieldType == "dropdown" ? (
                       <DropdownField
@@ -65,6 +66,7 @@ const AddList = () => {
                         item={item}
                         handleInputs={handleInputs}
                         placeholder={`Enter ${item.label}`}
+                        className="rounded-md md:rounded-full"
                       />
                     ) : null}
                   </div>
@@ -88,6 +90,7 @@ const AddList = () => {
                       onCheckedChange={(value) =>
                         handleInputs(feature.name, value)
                       }
+                      className="md:rounded-full"
                     />
                     <h2>{feature.label}</h2>
                   </div>

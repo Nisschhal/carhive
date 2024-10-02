@@ -10,7 +10,7 @@ const DropdownField = ({ item, handleInputs }) => {
   return (
     <div>
       <Select onValueChange={(value) => handleInputs(item.name, value)}>
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger className="shadow-none md:rounded-full  ">
           <SelectValue placeholder={item.label} />
         </SelectTrigger>
         <SelectContent>

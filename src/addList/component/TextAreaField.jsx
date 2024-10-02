@@ -5,6 +5,7 @@ const TextAreaField = ({ item, handleInputs, ...props }) => {
     <div>
       <Textarea
         onChange={(e) => handleInputs(item.name, e.target.value)}
+        required={item.required}
         {...props}
       />
     </div>
