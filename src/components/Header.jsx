@@ -10,8 +10,13 @@ const Header = () => {
     // Header Container
     <div className="mx-auto flex items-center  shadow-sm p-6">
       {/* logo */}
-      <Link to={"/"}>
+      {/* Mobile Logo */}
+      <Link to={"/"} className="md:hidden">
         <img src="/logo.svg" alt="" width={36} height={36} />
+      </Link>
+      {/* Desktop logo */}
+      <Link to={"/"} className="hidden md:block">
+        <img src="/logomd.svg" alt="" width={36} height={36} />
       </Link>
 
       {/* Nav  */}
