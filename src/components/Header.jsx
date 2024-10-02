@@ -1,5 +1,6 @@
 import { SignInButton, UserButton, useUser } from "@clerk/clerk-react";
 import { Button } from "./ui/button";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   // use the clerk to get user and if signed in or not
@@ -9,7 +10,9 @@ const Header = () => {
     // Header Container
     <div className="mx-auto flex items-center  shadow-sm p-6">
       {/* logo */}
-      <img src="/logo.svg" alt="" width={36} height={36} />
+      <Link to={"/"}>
+        <img src="/logo.svg" alt="" width={36} height={36} />
+      </Link>
 
       {/* Nav  */}
       <nav className="flex justify-center mx-auto">
@@ -33,14 +36,18 @@ const Header = () => {
       {isSignedIn ? (
         <div className="flex items-center gap-5">
           <UserButton />
-          <Button>Submit Listing</Button>
+          <Button>
+            <Link to={"/profile"}>Submit Listing</Link>
+          </Button>
         </div>
       ) : (
         <div className="flex items-center gap-4">
           <SignInButton mode="modal" forceRedirectUrl="/">
             <Button variant="outline">Sign in</Button>
           </SignInButton>
-          <Button>Submit Listing</Button>
+          <Button>
+            <Link to={"/profile"}>Submit Listing</Link>
+          </Button>
         </div>
       )}
     </div>
