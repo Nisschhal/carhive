@@ -19,11 +19,11 @@ const MostSearchedCar = () => {
       </h2>
 
       {/* Car Items in Carousel */}
-      <Carousel className="mx-auto px-6">
+      <Carousel className="mx-auto ">
         <CarouselContent>
           {FakeData.carList.map((car, index) => (
-            <CarouselItem className="basis-1/4">
-              <CarItem car={car} key={index} />
+            <CarouselItem className=" md:basis-1/2 lg:basis-1/4  " key={index}>
+              <CarItem car={car} />
             </CarouselItem>
           ))}
         </CarouselContent>

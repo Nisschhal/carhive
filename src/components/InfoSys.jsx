@@ -16,7 +16,7 @@ const InfoSys = () => {
           <div className="relative flex items-center bg-gray-100">
             <span className="hidden lg:absolute lg:inset-y-0 lg:-start-16 lg:block lg:w-16 lg:bg-gray-100"></span>
 
-            <div className="p-8 sm:p-16 lg:p-24">
+            <div className="p-8 sm:p-16 lg:p-24 text-center md:text-left">
               <h2 className="text-2xl font-bold sm:text-3xl">
                 CarHive: Your One-Stop Destination for Buying and Selling Cars
               </h2>

@@ -7,41 +7,47 @@ import { MdOpenInNew } from "react-icons/md";
 export const CarItem = ({ car }) => {
   return (
     <div className=" bg-white rounded-lg border hover:shadow-md cursor-pointer ">
-      <p className="absolute m-2 text-sm bg-green-500 rounded-full px-3 pb-1 text-white">
+      <p className="absolute m-2 text-xs md:text-base bg-green-500 rounded-full px-3 pb-1 text-white">
         New
       </p>
       <img src={car?.image} alt={car.name} className="rounded-t-lg" />
       <div className="p-4">
         {/* CARD Content */}
-        <h2 className="font-bold text-black text-center text-lg p-4">
+        <h2 className="font-bold text-black text-center md:text-lg p-4">
           {car.name}
         </h2>
         <Separator />
         {/* Miles || Fuel || Type */}
-        <div className="grid grid-cols-3  mt-5 ">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-3  mt-5 ">
           {/* Fuel Type */}
-          <div className="flex flex-col items-center">
-            <LuFuel className="text-lg mb-2" />
-            <h2 className=" ">{car.miles} Miles</h2>
+          <div className="flex flex-col  items-center">
+            <LuFuel className="text-sm md:text-lg mb-2" />
+            <h2 className="text-xs md:text-base text-center">
+              {car.miles} Miles
+            </h2>
           </div>
 
           {/* Miles */}
           <div className="flex flex-col items-center">
-            <MdSpeed className="text-lg mb-2" />
-            <h2 className=" ">{car.fuelType}</h2>
+            <MdSpeed className="text-sm md:text-lg mb-2" />
+            <h2 className=" text-xs md:text-base text-center">
+              {car.fuelType}
+            </h2>
           </div>
 
           {/* Gear Type */}
           <div className="flex flex-col items-center">
-            <GiGearStickPattern className="text-lg mb-2" />
-            <h2 className=" ">{car.gearType}</h2>
+            <GiGearStickPattern className="text-sm md:text-lg mb-2" />
+            <h2 className=" text-xs md:text-base text-center">
+              {car.gearType}
+            </h2>
           </div>
         </div>
         <Separator className="my-2" />
         {/* PRICE || VIEW DETAILS */}
-        <div className="flex items-center justify-between py-3">
-          <h2 className="font-bold text-xl">${car.price}</h2>
-          <h2 className="text-sm text-primary  flex gap-1 items-center ">
+        <div className="flex flex-col md:flex-row gap-3 items-center justify-between py-3">
+          <h2 className="font-bold text-xs md:text-xl">${car.price}</h2>
+          <h2 className="text-[8px] md:text-sm text-primary flex md:gap-1 items-center hover:underline ">
             View Detail
             <MdOpenInNew />
           </h2>

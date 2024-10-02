@@ -10,7 +10,7 @@ import Footer from "./components/Footer";
 
 const Home = () => {
   return (
-    <div>
+    <div className="border-3 border-red-700">
       {/* HEADER */}
       <Header />
 

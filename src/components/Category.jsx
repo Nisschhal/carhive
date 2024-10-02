@@ -18,7 +18,7 @@ const Category = () => {
               width={40}
               height={40}
             />
-            <h2 className="mt-2">{category.name}</h2>
+            <h2 className="mt-2 text-xs md:text-base">{category.name}</h2>
           </div>
         ))}
       </div>
