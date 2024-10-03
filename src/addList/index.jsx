@@ -8,6 +8,8 @@ import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { db } from "../../config";
+import { CarListing } from "../../config/schema";
 
 const AddList = () => {
   //  Form State
@@ -21,9 +23,18 @@ const AddList = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    try {
+      const result = await db.insert(CarListing).values(formData);
+      if (result) {
+        console.log("Data Saved successfully!");
+        console.log(result);
+      }
+    } catch (error) {
+      console.log("Error saving data!");
+      console.log(error.message);
+    }
   };
   return (
     <div>
