@@ -15,19 +15,47 @@ import IconField from "./component/IconField";
 const AddList = () => {
   //  Form State
   const [formData, setFormData] = useState([]);
+  const [featureFormData, setFeatureFormData] = useState({});
+  /**
+   * Capture form input data
+   * @param {*} name
+   * @param {*} value
+   */
   const handleInputs = (name, value) => {
-    setFormData((prevData) => {
+    setFormData((prevFormData) => {
       return {
-        ...prevData,
+        ...prevFormData,
         [name]: value,
       };
     });
   };
 
+  /**
+   * Capture checked features data
+   * @param {*} name
+   * @param {*} value
+   */
+  const handleFeatures = (name, value) => {
+    setFeatureFormData((prevFeaturesData) => {
+      return {
+        ...prevFeaturesData,
+        [name]: value,
+      };
+    });
+    console.log(featureFormData);
+  };
+
+  /**
+   * Submit the data to neon database for postgre data
+   * @param {*} e
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const result = await db.insert(CarListing).values(formData);
+      const result = await db.insert(CarListing).values({
+        ...formData,
+        features: featureFormData,
+      });
       if (result) {
         console.log("Data Saved successfully!");
         console.log(result);
@@ -101,7 +129,7 @@ const AddList = () => {
                     {/*  onCheckedChange to get the value: true and fale and regiter to handleInputs */}
                     <Checkbox
                       onCheckedChange={(value) =>
-                        handleInputs(feature.name, value)
+                        handleFeatures(feature.name, value)
                       }
                       className="md:rounded-full"
                     />
