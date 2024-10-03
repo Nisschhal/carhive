@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { db } from "../../config";
 import { CarListing } from "../../config/schema";
+import IconField from "./component/IconField";
 
 const AddList = () => {
   //  Form State
@@ -53,7 +54,8 @@ const AddList = () => {
               {carData.carDetails.map((item, index) => {
                 return (
                   <div key={index}>
-                    <label className="text-sm md:pl-2">
+                    <label className="text-sm md:pl-2 flex items-center gap-2 mb-1">
+                      <IconField icon={item?.icon} />
                       {item.label}
                       {item.required && <span className="text-red-600">*</span>}
                     </label>
