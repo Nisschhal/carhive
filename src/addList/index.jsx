@@ -11,6 +11,7 @@ import { useState } from "react";
 import { db } from "../../config";
 import { CarListing } from "../../config/schema";
 import IconField from "./component/IconField";
+import UploadImage from "./component/UploadImage";
 
 const AddList = () => {
   //  Form State
@@ -139,9 +140,9 @@ const AddList = () => {
               })}
             </div>
           </div>
-
-          {/* Car Image */}
-
+          <Separator className="my-6" />
+          {/* Car Image Upload */}
+          <UploadImage />
           {/* Submit Button */}
           <div className="flex justify-end mt-10">
             <Button type="submit">Submit</Button>

@@ -28,6 +28,10 @@
 
 ### Backend
 
+`firebase` for Uploaded Image Storage
+
+- create project >> register project to web >> install and copy-paste config code to source code
+
 #### Database
 
 - **PostgreSQL with drizzle**: ORM, with **_Neon_** as Serverless DB manager
@@ -35,5 +39,3 @@
   - Create Neon account and your project in it for **key** and db host
   - Install required dependecies and follow **drizzle-kit** configuration
   - And now create Schema for data manipulation to and from db
-  
-
