@@ -1,3 +1,6 @@
+import { Button } from "@/components/ui/button";
+import { storage } from "../../../config/firebase.config";
+import { ref, uploadBytes } from "firebase/storage";
 import { useState } from "react";
 import { IoMdCloseCircle } from "react-icons/io";
 const UploadImage = () => {
@@ -15,6 +18,29 @@ const UploadImage = () => {
   // Handle Image Remove
   const removeSelectedImage = (image) => {
     setSelectedFiles(selectedFiles.filter((file) => file != image));
+  };
+
+  // Handle Image upload to firebase
+  const uploadImagetoFirebase = async () => {
+    // create a filename using data with extension
+    // get the reference to store, and bucket(if there is any) and filname to reference file
+    // create the metadata as well if there is any
+    // 
+    try {
+      selectedFiles.forEach(async (file) => {
+        const fileName = Date.now() + ".jpeg";
+        const storageRef = ref(storage, "carhive/" + fileName);
+        const metaData = {
+          contentType: "image/jpeg",
+        };
+
+        const response = await uploadBytes(storageRef, file, metaData);
+        console.log("Image Upload Successful!");
+        console.log(response);
+      });
+    } catch (error) {
+      console.log("Error while uploading", error.message);
+    }
   };
 
   console.log("outside", selectedFiles);
@@ -58,6 +84,7 @@ const UploadImage = () => {
           onChange={onFileSelected}
         />
       </div>
+      <Button onClick={uploadImagetoFirebase}>Upload Image</Button>
     </div>
   );
 };

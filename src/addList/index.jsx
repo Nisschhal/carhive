@@ -142,12 +142,13 @@ const AddList = () => {
           </div>
           <Separator className="my-6" />
           {/* Car Image Upload */}
-          <UploadImage />
+          {/* <UploadImage /> */}
           {/* Submit Button */}
           <div className="flex justify-end mt-10">
             <Button type="submit">Submit</Button>
           </div>
         </form>
+        <UploadImage />
       </div>
     </div>
   );

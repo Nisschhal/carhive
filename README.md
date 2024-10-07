@@ -32,10 +32,16 @@
 
 - create project >> register project to web >> install and copy-paste config code to source code
 
-#### Database
+#### Database (data:postgreSQL) && (image:firebase)
 
 - **PostgreSQL with drizzle**: ORM, with **_Neon_** as Serverless DB manager
+
   - Follow postgreSQL docs in drizzle (Neon Postgres)
   - Create Neon account and your project in it for **key** and db host
-  - Install required dependecies and follow **drizzle-kit** configuration
+  - Install required dependecies and follow **drizzle-kit** configuration: create drizzle.config.js in source directory.
   - And now create Schema for data manipulation to and from db
+
+- **firebase** :
+  - setup the **_config_** file as per docs
+  - setup the **_storage_** with the given config app
+  - 
