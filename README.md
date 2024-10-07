@@ -44,4 +44,7 @@
 - **firebase** :
   - setup the **_config_** file as per docs
   - setup the **_storage_** with the given config app
-  - 
+  - impor the **storage** in form or where it is required
+  - create a filename >> get the reference to a particular file with **ref** from firebase/storage >> create a metaData if required >> uploadBytes(ref, file, metadata) >> **getDownloadURL(ref)** using created ref to access file online, from any where
+  - **Only works if read, write is allow if true** in firebase rule storage, else throws error, cors
+  -

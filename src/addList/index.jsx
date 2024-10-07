@@ -53,10 +53,14 @@ const AddList = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const result = await db.insert(CarListing).values({
-        ...formData,
-        features: featureFormData,
-      });
+      // insert the values and return the id
+      const result = await db
+        .insert(CarListing)
+        .values({
+          ...formData,
+          features: featureFormData,
+        })
+        .returning({ id: CarListing.id });
       if (result) {
         console.log("Data Saved successfully!");
         console.log(result);

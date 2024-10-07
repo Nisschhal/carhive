@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { storage } from "../../../config/firebase.config";
-import { ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useState } from "react";
 import { IoMdCloseCircle } from "react-icons/io";
 const UploadImage = () => {
@@ -24,8 +24,9 @@ const UploadImage = () => {
   const uploadImagetoFirebase = async () => {
     // create a filename using data with extension
     // get the reference to store, and bucket(if there is any) and filname to reference file
-    // create the metadata as well if there is any
-    // 
+    // create the metadata as well if there is any\
+    // upload upto firebase storage with uploadBytes(storage/dbref, file, metdata)
+    // get the uploaded url with created references for each file using getDownloadURL(ref)
     try {
       selectedFiles.forEach(async (file) => {
         const fileName = Date.now() + ".jpeg";
@@ -37,6 +38,8 @@ const UploadImage = () => {
         const response = await uploadBytes(storageRef, file, metaData);
         console.log("Image Upload Successful!");
         console.log(response);
+        const imageURL = await getDownloadURL(storageRef);
+        console.log("imageurl", imageURL);
       });
     } catch (error) {
       console.log("Error while uploading", error.message);
