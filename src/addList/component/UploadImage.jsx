@@ -1,11 +1,22 @@
 import { Button } from "@/components/ui/button";
 import { storage } from "../../../config/firebase.config";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoMdCloseCircle } from "react-icons/io";
-const UploadImage = () => {
+import { CarImages } from "../../../config/schema";
+import { db } from "../../../config/index";
+const UploadImage = ({ triggerImagesUploadWithId }) => {
+  // UseEffect to check if form data is insert and got the id
+  useEffect(() => {
+    // if there is any id in props then uploadImagetofirebase
+    if (triggerImagesUploadWithId) {
+      uploadImagetoFirebase();
+    }
+  }, [triggerImagesUploadWithId]);
+
   //  Image storage
   const [selectedFiles, setSelectedFiles] = useState([]);
+
   // Handle Image Selection
   const onFileSelected = (e) => {
     const files = e.target.files;
@@ -35,11 +46,21 @@ const UploadImage = () => {
           contentType: "image/jpeg",
         };
 
+        // upload the image to firebase
         const response = await uploadBytes(storageRef, file, metaData);
         console.log("Image Upload Successful!");
         console.log(response);
+
+        // get the url of the uploaded image from firebase
         const imageURL = await getDownloadURL(storageRef);
         console.log("imageurl", imageURL);
+
+        // Insert the uploaded url to db with reference to carlisting id
+        const result = await db.insert(CarImages).values({
+          imageUrl: imageURL,
+          carListingId: triggerImagesUploadWithId,
+        });
+        console.log("Image table created", result);
       });
     } catch (error) {
       console.log("Error while uploading", error.message);

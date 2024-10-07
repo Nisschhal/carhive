@@ -14,6 +14,10 @@ import IconField from "./component/IconField";
 import UploadImage from "./component/UploadImage";
 
 const AddList = () => {
+  // CarListing Data id storage to trigger image upload if any
+  const [triggerImagesUploadWithId, setTriggerImagesUploadWithId] =
+    useState(null);
+
   //  Form State
   const [formData, setFormData] = useState([]);
   const [featureFormData, setFeatureFormData] = useState({});
@@ -64,6 +68,7 @@ const AddList = () => {
       if (result) {
         console.log("Data Saved successfully!");
         console.log(result);
+        setTriggerImagesUploadWithId(result[0]?.id);
       }
     } catch (error) {
       console.log("Error saving data!");
@@ -146,13 +151,12 @@ const AddList = () => {
           </div>
           <Separator className="my-6" />
           {/* Car Image Upload */}
-          {/* <UploadImage /> */}
+          <UploadImage triggerImagesUploadWithId={triggerImagesUploadWithId} />
           {/* Submit Button */}
           <div className="flex justify-end mt-10">
             <Button type="submit">Submit</Button>
           </div>
         </form>
-        <UploadImage />
       </div>
     </div>
   );
