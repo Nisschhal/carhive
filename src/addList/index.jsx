@@ -12,8 +12,17 @@ import { db } from "../../config";
 import { CarListing } from "../../config/schema";
 import IconField from "./component/IconField";
 import UploadImage from "./component/UploadImage";
+import { BiLoaderAlt } from "react-icons/bi";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const AddList = () => {
+  // intalize the navigation for redirect
+  const navigate = useNavigate();
+
+  // Loader state while submitting
+  const [loader, setLoader] = useState(false);
+
   // CarListing Data id storage to trigger image upload if any
   const [triggerImagesUploadWithId, setTriggerImagesUploadWithId] =
     useState(null);
@@ -51,11 +60,15 @@ const AddList = () => {
   };
 
   /**
-   * Submit the data to neon database for postgre data
+   * Submit the data to neon database for postgreSQL data
    * @param {*} e
    */
   const handleSubmit = async (e) => {
+    // enter loading state
+    setLoader(true);
     e.preventDefault();
+    toast("Please wait...");
+
     try {
       // insert the values and return the id
       const result = await db
@@ -68,13 +81,31 @@ const AddList = () => {
       if (result) {
         console.log("Data Saved successfully!");
         console.log(result);
+
+        // trigger upload image with inserted form data id
         setTriggerImagesUploadWithId(result[0]?.id);
+        // clear form data
+        clearFormData();
+        // exit loading state
+        setLoader(false);
+
+        // redirect the route to '/profile'
+        navigate("/profile");
       }
     } catch (error) {
       console.log("Error saving data!");
       console.log(error.message);
+      // exit loading state
+      setLoader(false);
     }
   };
+
+  // Clear form Data: Form to empty array and feature data to empty object
+  const clearFormData = () => {
+    setFormData([]);
+    setFeatureFormData({});
+  };
+
   return (
     <div>
       <Header />
@@ -151,10 +182,19 @@ const AddList = () => {
           </div>
           <Separator className="my-6" />
           {/* Car Image Upload */}
-          <UploadImage triggerImagesUploadWithId={triggerImagesUploadWithId} />
+          <UploadImage
+            triggerImagesUploadWithId={triggerImagesUploadWithId}
+            setLoader={(v) => setLoader(v)}
+          />
           {/* Submit Button */}
           <div className="flex justify-end mt-10">
-            <Button type="submit">Submit</Button>
+            <Button type="submit" disabled={loader}>
+              {!loader ? (
+                "Submit"
+              ) : (
+                <BiLoaderAlt className="animate-spin size-7" />
+              )}
+            </Button>
           </div>
         </form>
       </div>
