@@ -16,7 +16,7 @@ import { BiLoaderAlt } from "react-icons/bi";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
-import moment from "moment/moment";
+import moment from "moment";
 
 const AddList = () => {
   // get the user info to store postedBy
@@ -82,7 +82,7 @@ const AddList = () => {
           ...formData,
           features: featureFormData,
           createdBy: user?.primaryEmailAddress?.emailAddress,
-          postedOn: moment.format("DD/MMM/yyyy"),
+          postedOn: moment().format("DD/MMM/yyyy"),
         })
         .returning({ id: CarListing.id });
       if (result) {
