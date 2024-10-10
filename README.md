@@ -32,6 +32,8 @@ CarHive is a comprehensive car marketplace platform aimed at simplifying the pro
 6. **React Icons**  
    Used for seamless icon integration throughout the UI.
 
+7. **Moment.js** Get the current data and time with formats.
+
 ### Resources
 
 - **Untitled UI**: for logo inspiration and branding.

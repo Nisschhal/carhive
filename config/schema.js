@@ -24,6 +24,8 @@ export const CarListing = pgTable("carListing", {
   offerType: varchar("offerType"),
   listingDescription: varchar("listingDescription").notNull(),
   features: json("features"),
+  createdBy: varchar("createdBy").notNull(),
+  postedOn: varchar("postedOn"),
 });
 
 // Schema to link image with carlisting id

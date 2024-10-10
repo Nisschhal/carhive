@@ -15,8 +15,13 @@ import UploadImage from "./component/UploadImage";
 import { BiLoaderAlt } from "react-icons/bi";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "@clerk/clerk-react";
+import moment from "moment/moment";
 
 const AddList = () => {
+  // get the user info to store postedBy
+  const { user } = useUser();
+
   // intalize the navigation for redirect
   const navigate = useNavigate();
 
@@ -76,6 +81,8 @@ const AddList = () => {
         .values({
           ...formData,
           features: featureFormData,
+          createdBy: user?.primaryEmailAddress?.emailAddress,
+          postedOn: moment.format("DD/MMM/yyyy"),
         })
         .returning({ id: CarListing.id });
       if (result) {
@@ -88,9 +95,6 @@ const AddList = () => {
         clearFormData();
         // exit loading state
         setLoader(false);
-
-        // redirect the route to '/profile'
-        navigate("/profile");
       }
     } catch (error) {
       console.log("Error saving data!");
@@ -184,7 +188,10 @@ const AddList = () => {
           {/* Car Image Upload */}
           <UploadImage
             triggerImagesUploadWithId={triggerImagesUploadWithId}
-            setLoader={(v) => setLoader(v)}
+            setLoader={(v) => {
+              setLoader(v); // redirect the route to '/profile'
+              navigate("/profile");
+            }}
           />
           {/* Submit Button */}
           <div className="flex justify-end mt-10">
