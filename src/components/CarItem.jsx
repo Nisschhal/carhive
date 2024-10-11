@@ -6,7 +6,7 @@ import { MdOpenInNew } from "react-icons/md";
 
 export const CarItem = ({ car }) => {
   return (
-    <div className=" bg-white rounded-lg border hover:shadow-md cursor-pointer ">
+    <div className=" bg-white rounded-lg border hover:drop-shadow-lg cursor-pointer transition duration-200">
       <p className="absolute m-2 text-xs md:text-base bg-green-500 rounded-full px-3 pb-1 text-white">
         New
       </p>
@@ -17,7 +17,7 @@ export const CarItem = ({ car }) => {
       />
       <div className="p-4">
         {/* CARD Content */}
-        <h2 className="font-bold text-black text-center md:text-lg lg:text-xl  p-4 md:h-[100px]  text-ellipsis overflow-hidden ">
+        <h2 className="font-bold text-black text-center md:text-lg lg:text-xl  p-4  text-ellipsis overflow-hidden ">
           {car?.listingTitle}
         </h2>
         <Separator />

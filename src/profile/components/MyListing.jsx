@@ -49,15 +49,18 @@ const MyListing = () => {
         )}
       </div>
       {/* // CAR LISTING IF ANY */}
-      <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 gap-5 mt-10">
         {carList.map((item, index) => (
           <div key={index}>
             <CarItem car={item} />
-            <div className="p-2 bg-gray-50 rounded-lg flex justify-between">
-              <Button variant="outline" className="text-center mx-auto">
+            <div className="p-2 bg-gray-50 rounded-lg flex justify-between ">
+              <Button
+                variant="outline"
+                className="text-center mx-auto border-gray-200 bg-gray-100 flex-1 md:rounded-md"
+              >
                 Edit
               </Button>
-              <Button variant="destructive">
+              <Button variant="destructive" className="md:rounded-md ml-2">
                 <FaTrashAlt />
               </Button>
             </div>
