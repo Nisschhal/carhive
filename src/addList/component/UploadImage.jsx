@@ -4,7 +4,27 @@ import { useEffect, useState } from "react";
 import { IoMdCloseCircle } from "react-icons/io";
 import { CarImages } from "../../../config/schema";
 import { db } from "../../../config/index";
-const UploadImage = ({ triggerImagesUploadWithId, setLoader }) => {
+import { eq } from "drizzle-orm";
+const UploadImage = ({
+  triggerImagesUploadWithId,
+  setLoader,
+  carInfo,
+  mode,
+}) => {
+  console.log("infossssssssss", carInfo, triggerImagesUploadWithId);
+  // CarInfo image state
+  const [editUploadedImages, setEditUploadedImages] = useState([]);
+  // useEffect to trigger uploadeImage in edit mode
+  useEffect(() => {
+    // empty image details, if any
+    if (mode == "edit") {
+      carInfo?.images?.forEach((image) => {
+        setEditUploadedImages((prev) => [...prev, image?.imageUrl]);
+        console.log(image);
+      });
+    }
+  }, [carInfo]);
+
   // UseEffect to check if form data is insert and got the id
   useEffect(() => {
     // if there is any id in props then uploadImagetofirebase
@@ -26,12 +46,29 @@ const UploadImage = ({ triggerImagesUploadWithId, setLoader }) => {
   };
 
   // Handle Image Remove
-  const removeSelectedImage = (image) => {
-    setSelectedFiles(selectedFiles.filter((file) => file != image));
+  const removeSelectedImage = async (image, index) => {
+    try {
+      // remove from db
+      const result = await db
+        .delete(CarImages)
+        .where(eq(CarImages.id, carInfo?.images[index].id));
+
+      if (result) {
+        console.log("Image deleted successfully!");
+      }
+
+      // remove from the editImage Details
+      setEditUploadedImages(editUploadedImages.filter((file) => file != image));
+      // also remove from the selected file if any
+      setSelectedFiles(selectedFiles.filter((file) => file != image));
+    } catch (error) {
+      console.log("Error while removing image from db", error.message);
+    }
   };
 
   // Handle Image upload to firebase
   const uploadImagetoFirebase = async () => {
+    console.log("triggereed");
     // create a filename using data with extension
     // get the reference to store, and bucket(if there is any) and filname to reference file
     // create the metadata as well if there is any\
@@ -41,30 +78,29 @@ const UploadImage = ({ triggerImagesUploadWithId, setLoader }) => {
       // enter loading state
       // enter loading state
       setLoader(true);
-      if (selectedFiles)
-        selectedFiles?.forEach(async (file) => {
-          const fileName = Date.now() + ".jpeg";
-          const storageRef = ref(storage, "carhive/" + fileName);
-          const metaData = {
-            contentType: "image/jpeg",
-          };
+      selectedFiles?.forEach(async (file) => {
+        const fileName = Date.now() + ".jpeg";
+        const storageRef = ref(storage, "carhive/" + fileName);
+        const metaData = {
+          contentType: "image/jpeg",
+        };
 
-          // upload the image to firebase
-          const response = await uploadBytes(storageRef, file, metaData);
-          console.log("Image Upload Successful!");
-          console.log(response);
+        // upload the image to firebase
+        const response = await uploadBytes(storageRef, file, metaData);
+        console.log("Image Upload Successful!");
+        console.log(response);
 
-          // get the url of the uploaded image from firebase
-          const imageURL = await getDownloadURL(storageRef);
-          console.log("imageurl", imageURL);
+        // get the url of the uploaded image from firebase
+        const imageURL = await getDownloadURL(storageRef);
+        console.log("imageurl", imageURL);
 
-          // Insert the uploaded url to db with reference to carlisting id
-          const result = await db.insert(CarImages).values({
-            imageUrl: imageURL,
-            carListingId: triggerImagesUploadWithId,
-          });
-          console.log("Image table created", result);
+        // Insert the uploaded url to db with reference to carlisting id
+        const result = await db.insert(CarImages).values({
+          imageUrl: imageURL,
+          carListingId: triggerImagesUploadWithId,
         });
+        console.log("Image table created", result);
+      });
       // clear files after table car images created
       clearImages();
 
@@ -90,6 +126,25 @@ const UploadImage = ({ triggerImagesUploadWithId, setLoader }) => {
 
       {/* GRID CONTAINER FOR UPLOAD IMAGE */}
       <div className="grid grid-cols-2 md:grid-cols-4 md:grid-cols-6 gap-5 items-center">
+        {/* EDIT MODE IMAGES */}
+        {mode == "edit" &&
+          editUploadedImages.map((image, index) => (
+            <div key={index} className="relative">
+              <img
+                src={image}
+                alt={image.name}
+                className="w-full h-[130px] md:h-[180px] lg:h-[220px] object-cover rounded-xl"
+              />
+              {/* Image remove Icon */}
+              <div
+                onClick={() => removeSelectedImage(image, index)}
+                className="absolute right-2 top-2 rounded-full bg-red-100 hover:bg-opacity-0 cursor-pointer group p-2 transition-all duration-200"
+              >
+                <IoMdCloseCircle className="text-red-500 text-sm group-hover:text-red-500" />
+              </div>
+            </div>
+          ))}
+
         {/* Selected/Uploaded Images */}
         {selectedFiles.map((image, index) => (
           <div key={index} className="relative">

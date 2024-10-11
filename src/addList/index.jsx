@@ -46,7 +46,7 @@ const AddList = () => {
     const result = await db
       .select()
       .from(CarListing)
-      .innerJoin(CarImages, eq(CarListing.id, CarImages.carListingId))
+      .leftJoin(CarImages, eq(CarListing.id, CarImages.carListingId))
       .where(eq(CarListing.id, recordId));
 
     // format the fetched data
@@ -58,8 +58,8 @@ const AddList = () => {
     console.log(formData);
 
     // setCar info features
-    SetCarInfoFeatures(formateData[0].features);
-    setFeatureFormData(formateData[0].features);
+    SetCarInfoFeatures(formateData[0]?.features);
+    setFeatureFormData(formateData[0]?.features);
   }
 
   // get the user info to store postedBy
@@ -132,15 +132,16 @@ const AddList = () => {
           .returning({ id: CarListing.id });
 
         if (result) {
-          console.log("Data updated Successfully!");
+          console.log("Data update successfully!");
           console.log(result);
+
+          // trigger upload image with inserted form data id
+          setTriggerImagesUploadWithId(result[0]?.id);
+          // clear form data
+          clearFormData();
+          // exit loading state
+          setLoader(false);
         }
-
-        // nigate to profile
-        navigate("/profile");
-
-        // exit loading state
-        setLoader(false);
       } catch (error) {
         console.log("Error while updating data", error.message);
         // exit loading state
@@ -266,6 +267,8 @@ const AddList = () => {
           {/* Car Image Upload */}
           <UploadImage
             triggerImagesUploadWithId={triggerImagesUploadWithId}
+            carInfo={carInfo}
+            mode={mode}
             setLoader={(v) => {
               setLoader(v); // redirect the route to '/profile'
               navigate("/profile");
