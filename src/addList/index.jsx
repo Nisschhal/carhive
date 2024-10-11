@@ -7,18 +7,61 @@ import DropdownField from "./component/DropdownField";
 import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { db } from "../../config";
-import { CarListing } from "../../config/schema";
+import { CarImages, CarListing } from "../../config/schema";
 import IconField from "./component/IconField";
 import UploadImage from "./component/UploadImage";
 import { BiLoaderAlt } from "react-icons/bi";
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
 import moment from "moment";
+import { eq } from "drizzle-orm";
+import FormatResult from "@/shared/Service";
 
 const AddList = () => {
+  // get the params queries if edit operation is triggered
+  const [searchParams] = useSearchParams();
+
+  // store the car info if edit triggered
+  const [carInfo, setCarInfo] = useState({});
+  // store the car info features
+  const [carInfoFeatures, SetCarInfoFeatures] = useState({});
+
+  const mode = searchParams.get("mode");
+  const recordId = searchParams.get("id");
+  console.log("workng", mode, recordId);
+
+  // if add-list page is in edit mode than fetch the data with given id
+  useEffect(() => {
+    if (mode == "edit") {
+      getListingDetails();
+    }
+  }, [mode]);
+
+  // get the current id data for edit
+
+  async function getListingDetails() {
+    const result = await db
+      .select()
+      .from(CarListing)
+      .innerJoin(CarImages, eq(CarListing.id, CarImages.carListingId))
+      .where(eq(CarListing.id, recordId));
+
+    // format the fetched data
+    const formateData = FormatResult(result);
+
+    // formatdata comes in list, thus index 0
+    setCarInfo(formateData[0]);
+    setFormData(formateData[0]);
+    console.log(formData);
+
+    // setCar info features
+    SetCarInfoFeatures(formateData[0].features);
+    setFeatureFormData(formateData[0].features);
+  }
+
   // get the user info to store postedBy
   const { user } = useUser();
 
@@ -74,33 +117,64 @@ const AddList = () => {
     e.preventDefault();
     toast("Please wait...");
 
-    try {
-      // insert the values and return the id
-      const result = await db
-        .insert(CarListing)
-        .values({
-          ...formData,
-          features: featureFormData,
-          createdBy: user?.primaryEmailAddress?.emailAddress,
-          postedOn: moment().format("DD/MMM/yyyy"),
-        })
-        .returning({ id: CarListing.id });
-      if (result) {
-        console.log("Data Saved successfully!");
-        console.log(result);
+    if (mode == "edit") {
+      try {
+        // insert the values and return the id
+        const result = await db
+          .update(CarListing)
+          .set({
+            ...formData,
+            features: featureFormData,
+            createdBy: user?.primaryEmailAddress?.emailAddress,
+            postedOn: moment().format("DD/MMM/yyyy"),
+          })
+          .where(eq(CarListing.id, recordId))
+          .returning({ id: CarListing.id });
 
-        // trigger upload image with inserted form data id
-        setTriggerImagesUploadWithId(result[0]?.id);
-        // clear form data
-        clearFormData();
+        if (result) {
+          console.log("Data updated Successfully!");
+          console.log(result);
+        }
+
+        // nigate to profile
+        navigate("/profile");
+
+        // exit loading state
+        setLoader(false);
+      } catch (error) {
+        console.log("Error while updating data", error.message);
         // exit loading state
         setLoader(false);
       }
-    } catch (error) {
-      console.log("Error saving data!");
-      console.log(error.message);
-      // exit loading state
-      setLoader(false);
+    } else {
+      try {
+        // insert the values and return the id
+        const result = await db
+          .insert(CarListing)
+          .values({
+            ...formData,
+            features: featureFormData,
+            createdBy: user?.primaryEmailAddress?.emailAddress,
+            postedOn: moment().format("DD/MMM/yyyy"),
+          })
+          .returning({ id: CarListing.id });
+        if (result) {
+          console.log("Data Saved successfully!");
+          console.log(result);
+
+          // trigger upload image with inserted form data id
+          setTriggerImagesUploadWithId(result[0]?.id);
+          // clear form data
+          clearFormData();
+          // exit loading state
+          setLoader(false);
+        }
+      } catch (error) {
+        console.log("Error saving data!");
+        console.log(error.message);
+        // exit loading state
+        setLoader(false);
+      }
     }
   };
 
@@ -140,12 +214,14 @@ const AddList = () => {
                           item.fieldType == "number" ? "(Number)" : ""
                         }`}
                         className="rounded-md md:rounded-full"
+                        carInfo={carInfo}
                       />
                     ) : item.fieldType == "dropdown" ? (
                       <DropdownField
                         item={item}
                         handleInputs={handleInputs}
                         placeholder={`Enter ${item.label}`}
+                        carInfo={carInfo}
                       />
                     ) : item.fieldType == "textarea" ? (
                       <TextAreaField
@@ -153,6 +229,7 @@ const AddList = () => {
                         handleInputs={handleInputs}
                         placeholder={`Enter ${item.label}`}
                         className="rounded-md md:rounded-full"
+                        carInfo={carInfo}
                       />
                     ) : null}
                   </div>
@@ -176,6 +253,7 @@ const AddList = () => {
                       onCheckedChange={(value) =>
                         handleFeatures(feature.name, value)
                       }
+                      checked={carInfoFeatures?.[feature.name]}
                       className="md:rounded-full"
                     />
                     <h2>{feature.label}</h2>

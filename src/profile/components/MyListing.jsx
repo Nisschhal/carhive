@@ -54,12 +54,18 @@ const MyListing = () => {
           <div key={index}>
             <CarItem car={item} />
             <div className="p-2 bg-gray-50 rounded-lg flex justify-between ">
-              <Button
-                variant="outline"
-                className="text-center mx-auto border-gray-200 bg-gray-100 flex-1 md:rounded-md"
+              {/* // Link to add-list form with selected data */}
+              <Link
+                to={"/add-list?mode=edit&id=" + item?.id}
+                className="w-full"
               >
-                Edit
-              </Button>
+                <Button
+                  variant="outline"
+                  className="w-full text-center mx-auto border-gray-200 bg-gray-100 flex-1 md:rounded-md"
+                >
+                  Edit
+                </Button>
+              </Link>
               <Button variant="destructive" className="md:rounded-md ml-2">
                 <FaTrashAlt />
               </Button>

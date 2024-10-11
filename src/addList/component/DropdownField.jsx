@@ -6,12 +6,19 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const DropdownField = ({ item, handleInputs }) => {
+const DropdownField = ({ item, handleInputs, carInfo }) => {
   return (
     <div>
-      <Select onValueChange={(value) => handleInputs(item.name, value)}>
+      <Select
+        onValueChange={(value) => handleInputs(item.name, value)}
+        defaultValue={carInfo?.[item.name]}
+      >
         <SelectTrigger className="shadow-none md:rounded-full  ">
-          <SelectValue placeholder={item.label} />
+          <SelectValue
+            placeholder={
+              carInfo?.[item?.name] ? carInfo?.[item?.name] : item.label
+            }
+          />
         </SelectTrigger>
         <SelectContent>
           {item?.options?.map((option, index) => {

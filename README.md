@@ -67,6 +67,10 @@ CarHive is a comprehensive car marketplace platform aimed at simplifying the pro
 
    _Note: Ensure that Firebase storage rules allow read and write access, or it will throw CORS errors._
 
+4. **CRUD Operations**
+   - Drizzle orm to _`_insert()_, _select(), _update()_, and _delete()_`_
+   -
+
 ---
 
 ## Learning Outcomes
