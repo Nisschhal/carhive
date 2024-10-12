@@ -17,7 +17,7 @@ export const CarItem = ({ car }) => {
       />
       <div className="p-4">
         {/* CARD Content */}
-        <h2 className="font-bold text-black text-center md:text-lg lg:text-xl  p-4  text-ellipsis overflow-hidden ">
+        <h2 className="flex font-bold text-black text-center md:text-lg lg:text-xl p-4   ">
           {car?.listingTitle}
         </h2>
         <Separator />

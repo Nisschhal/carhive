@@ -9,6 +9,7 @@ import { ClerkProvider } from "@clerk/clerk-react";
 import Profile from "./profile/index.jsx";
 import AddList from "./addList/index.jsx";
 import { Toaster } from "@/components/ui/sonner";
+import SearchByCategory from "./search/[category]/index.jsx";
 
 // ROUTE PATH AND THEIR ELEMENTS
 const router = createBrowserRouter([
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
   { path: "/contact", element: <Contact /> },
   { path: "/profile", element: <Profile /> },
   { path: "/add-list", element: <AddList /> },
+  { path: "/search/:category", element: <SearchByCategory /> },
   { path: "*", element: <NotFound /> },
 ]);
 
