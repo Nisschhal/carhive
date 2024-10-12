@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import Search from "@/components/Search";
 import { db } from "../../config";
 import { CarImages, CarListing } from "../../config/schema";
-import { eq, gt, gte, lt, lte, or } from "drizzle-orm";
+import { eq, gte, or } from "drizzle-orm";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import FormatResult from "@/shared/Service";

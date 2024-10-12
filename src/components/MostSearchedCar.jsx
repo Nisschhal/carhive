@@ -1,4 +1,3 @@
-import FakeData from "@/shared/fakerData";
 import { CarItem } from "./CarItem";
 import {
   Carousel,
@@ -15,7 +14,6 @@ import { useEffect, useState } from "react";
 
 const MostSearchedCar = () => {
   const [popularCar, setPopularCar] = useState([]);
-  console.log(FakeData.carList);
 
   // get the popular car from the db
   const getPopularCarList = async () => {

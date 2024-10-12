@@ -11,6 +11,7 @@ import AddList from "./addList/index.jsx";
 import { Toaster } from "@/components/ui/sonner";
 import SearchByCategory from "./search/[category]/index.jsx";
 import SearchCar from "./search/index.jsx";
+import ListingDetails from "./listing-details/[id]/index.jsx";
 
 // ROUTE PATH AND THEIR ELEMENTS
 const router = createBrowserRouter([
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
   { path: "/add-list", element: <AddList /> },
   { path: "/search", element: <SearchCar /> },
   { path: "/search/:category", element: <SearchByCategory /> },
+  { path: "/listing-details/:id", element: <ListingDetails /> },
   { path: "*", element: <NotFound /> },
 ]);
 
