@@ -51,12 +51,12 @@ const Search = () => {
       {/* 3 */}
       <Select onValueChange={(v) => onSelectSearch("price", v)}>
         <SelectTrigger className="shadow-none md:focus:rounded-full outline-none md:border-none w-full">
-          <SelectValue placeholder="Pricing" />
+          <SelectValue placeholder="Pricing (equal and above)" />
         </SelectTrigger>
         <SelectContent>
           {Data.Pricing.map((price, index) => (
             <SelectItem value={price.amount} key={index}>
-              {price.amount}$
+              {price.amount} <span className="font-semibold">$</span>
             </SelectItem>
           ))}
         </SelectContent>

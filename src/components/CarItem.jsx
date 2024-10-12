@@ -3,13 +3,17 @@ import { Separator } from "@/components/ui/separator";
 import { MdSpeed } from "react-icons/md";
 import { GiGearStickPattern } from "react-icons/gi";
 import { MdOpenInNew } from "react-icons/md";
+import { useLocation } from "react-router-dom";
 
 export const CarItem = ({ car }) => {
+  const { pathname } = useLocation();
   return (
     <div className=" bg-white rounded-lg border hover:drop-shadow-lg cursor-pointer transition duration-200">
-      <p className="absolute m-2 text-xs md:text-base bg-green-500 rounded-full px-3 pb-1 text-white">
-        New
-      </p>
+      {pathname == "/" && (
+        <p className="absolute m-2 text-xs md:text-base bg-green-500 rounded-full px-3 pb-1 text-white">
+          New
+        </p>
+      )}
       <img
         src={car?.images[0]?.imageUrl}
         alt={car?.name}

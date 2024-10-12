@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import Search from "@/components/Search";
 import { db } from "../../config";
 import { CarImages, CarListing } from "../../config/schema";
-import { eq, gt } from "drizzle-orm";
+import { eq, gt, gte, lt, lte, or } from "drizzle-orm";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import FormatResult from "@/shared/Service";
@@ -15,25 +15,32 @@ const SearchCar = () => {
   // extract the data from searchParams
   const condition = searchParams.get("condition");
   const make = searchParams.get("make");
-  const price = searchParams.get("price");
+  const price = searchParams.get("price") || 0;
   // state for searchedCars
   const [searchedCar, setSearchedCars] = useState([]);
 
   console.log(make, condition, price);
 
   const getSearchedCars = async () => {
+    setSearchedCars([]);
     console.log("cliked");
     const result = await db
       .select()
       .from(CarListing)
       .leftJoin(CarImages, eq(CarListing.id, CarImages.carListingId))
       .where(
-        (condition != undefined && eq(CarListing.condition, condition)) ||
-          (make != undefined && eq(CarListing.make, make))
+        or(
+          eq(CarListing.condition, condition),
+          eq(CarListing.make, make),
+          gte(CarListing.sellingPrice, price)
+        )
       );
-    const res = FormatResult(result);
-    console.log(res);
-    setSearchedCars(res);
+    console.log(result);
+    if (result) {
+      const res = FormatResult(result);
+      console.log("result", res);
+      setSearchedCars(res);
+    }
   };
 
   useEffect(() => {
