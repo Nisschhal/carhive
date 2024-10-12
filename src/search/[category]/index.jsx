@@ -1,15 +1,5 @@
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Separator } from "@/components/ui/separator";
-import { CiSearch } from "react-icons/ci";
-import Data from "@/shared/data";
 import Header from "@/components/Header";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { db } from "../../../config";
 import { CarImages, CarListing } from "../../../config/schema";
@@ -17,8 +7,6 @@ import { eq } from "drizzle-orm";
 import FormatResult from "@/shared/Service";
 import Search from "@/components/Search";
 import { CarItem } from "@/components/CarItem";
-import { Button } from "@/components/ui/button";
-import { FaTrashAlt } from "react-icons/fa";
 
 const SearchByCategory = () => {
   // storage for carByCategory
@@ -43,7 +31,7 @@ const SearchByCategory = () => {
   return (
     <div>
       <Header />
-      <div className="bg-black p-16 flex justify-center ">
+      <div className="flex justify-center bg-gradient-to-r from-blue-400 to-indigo-600 p-10 md:p-15">
         <Search />
       </div>
       {/* CARs By Category */}
