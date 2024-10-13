@@ -11,6 +11,7 @@ import CarFeatures from "../components/CarFeatures";
 import CarPrice from "../components/CarPrice";
 import CarSpecification from "../components/CarSpecification";
 import OwnerDetails from "../components/OwnerDetails";
+import FinancialCalculator from "../components/FinancialCalculator";
 
 const ListingDetails = () => {
   // get the car id from route using params
@@ -53,6 +54,8 @@ const ListingDetails = () => {
               <CarDescription carDetails={carDetails} />
               {/* Feature List */}
               <CarFeatures features={carDetails?.features} />
+              {/* Financial Calculator */}
+              <FinancialCalculator carDetails={carDetails} />
             </div>
             {/* RIGHT Side */}
             <div className="">
