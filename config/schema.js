@@ -25,6 +25,10 @@ export const CarListing = pgTable("carListing", {
   listingDescription: varchar("listingDescription").notNull(),
   features: json("features"),
   createdBy: varchar("createdBy").notNull(),
+  userName: varchar("userName").notNull().default("Anonymous"),
+  userImageUrl: varchar("userImageUrl").default(
+    "https://www.emmegi.co.uk/wp-content/uploads/2019/01/User-Icon.jpg"
+  ),
   postedOn: varchar("postedOn"),
 });
 

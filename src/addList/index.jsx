@@ -126,6 +126,7 @@ const AddList = () => {
             ...formData,
             features: featureFormData,
             createdBy: user?.primaryEmailAddress?.emailAddress,
+
             postedOn: moment().format("DD/MMM/yyyy"),
           })
           .where(eq(CarListing.id, recordId))
@@ -156,6 +157,8 @@ const AddList = () => {
             ...formData,
             features: featureFormData,
             createdBy: user?.primaryEmailAddress?.emailAddress,
+            userName: user?.fullName,
+            userImageUrl: user?.imageUrl,
             postedOn: moment().format("DD/MMM/yyyy"),
           })
           .returning({ id: CarListing.id });

@@ -9,7 +9,7 @@ const DetailHeader = ({ carDetails }) => {
     <div>
       <Header />
       {/* Car Heading */}
-      <div className="p-10 md:px-20">
+      <div className="px-10 md:px-20">
         {carDetails?.listingTitle ? (
           <div>
             <h2 className="text-3xl font-bold ">{carDetails?.listingTitle}</h2>
