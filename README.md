@@ -68,8 +68,17 @@ CarHive is a comprehensive car marketplace platform aimed at simplifying the pro
    _Note: Ensure that Firebase storage rules allow read and write access, or it will throw CORS errors._
 
 4. **CRUD Operations**
-   - Drizzle orm to _`_insert()_, _select(), _update()_, and _delete()_`_
-   -
+
+   - Drizzle orm to _`\_insert()_, _select(), \_update()_, and _delete()_`\_
+
+5. **SendBrid**
+
+   - For communication api: chat messages
+     - setup project
+     - npm i @sendbird/uikit-react
+
+6. **Axios**
+   - For api calls: Sendbird: createUser, createGroup Channels
 
 ---
 

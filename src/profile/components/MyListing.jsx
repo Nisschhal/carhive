@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import FormatResult from "@/shared/Service";
 import { CarItem } from "@/components/CarItem";
 import { FaTrashAlt } from "react-icons/fa";
+import Service from "@/shared/Service";
 
 const MyListing = () => {
   // get the current user
@@ -27,7 +28,7 @@ const MyListing = () => {
       .orderBy(desc(CarListing.id));
 
     // format the fetched data
-    carsListing = FormatResult(result);
+    carsListing = Service.FormatResult(result);
     // set the fromated data to car state
     setCarList(carsListing);
   };

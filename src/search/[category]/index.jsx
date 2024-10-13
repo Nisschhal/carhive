@@ -7,6 +7,7 @@ import { eq } from "drizzle-orm";
 import FormatResult from "@/shared/Service";
 import Search from "@/components/Search";
 import { CarItem } from "@/components/CarItem";
+import Service from "@/shared/Service";
 
 const SearchByCategory = () => {
   // storage for carByCategory
@@ -24,7 +25,7 @@ const SearchByCategory = () => {
       .from(CarListing)
       .leftJoin(CarImages, eq(CarListing.id, CarImages.carListingId))
       .where(eq(CarListing.category, category));
-    const formatedResult = FormatResult(result);
+    const formatedResult = Service.FormatResult(result);
     setCategoryCars(formatedResult);
     console.log(category, formatedResult);
   };

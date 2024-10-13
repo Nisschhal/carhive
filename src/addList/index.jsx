@@ -19,6 +19,7 @@ import { useUser } from "@clerk/clerk-react";
 import moment from "moment";
 import { eq } from "drizzle-orm";
 import FormatResult from "@/shared/Service";
+import Service from "@/shared/Service";
 
 const AddList = () => {
   // get the params queries if edit operation is triggered
@@ -50,7 +51,7 @@ const AddList = () => {
       .where(eq(CarListing.id, recordId));
 
     // format the fetched data
-    const formateData = FormatResult(result);
+    const formateData = Service.FormatResult(result);
 
     // formatdata comes in list, thus index 0
     setCarInfo(formateData[0]);

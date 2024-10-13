@@ -11,6 +11,7 @@ import { CarImages, CarListing } from "../../config/schema";
 import { desc, eq } from "drizzle-orm";
 import FormatResult from "@/shared/Service";
 import { useEffect, useState } from "react";
+import Service from "@/shared/Service";
 
 const MostSearchedCar = () => {
   const [popularCar, setPopularCar] = useState([]);
@@ -24,7 +25,7 @@ const MostSearchedCar = () => {
       .orderBy(desc(CarListing.id))
       .limit(10);
 
-    const carList = FormatResult(result);
+    const carList = Service.FormatResult(result);
     setPopularCar(carList);
   };
 

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import FormatResult from "@/shared/Service";
 import { CarItem } from "@/components/CarItem";
+import Service from "@/shared/Service";
 
 const SearchCar = () => {
   // url params to get condition, category, price
@@ -37,7 +38,7 @@ const SearchCar = () => {
       );
     console.log(result);
     if (result) {
-      const res = FormatResult(result);
+      const res = Service.FormatResult(result);
       console.log("result", res);
       setSearchedCars(res);
     }

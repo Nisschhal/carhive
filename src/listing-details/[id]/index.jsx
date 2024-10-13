@@ -12,6 +12,7 @@ import CarPrice from "../components/CarPrice";
 import CarSpecification from "../components/CarSpecification";
 import OwnerDetails from "../components/OwnerDetails";
 import FinancialCalculator from "../components/FinancialCalculator";
+import Service from "@/shared/Service";
 
 const ListingDetails = () => {
   // get the car id from route using params
@@ -31,7 +32,7 @@ const ListingDetails = () => {
         .leftJoin(CarImages, eq(CarListing.id, CarImages.carListingId))
         .where(eq(CarListing.id, id));
 
-      const formatedResult = FormatResult(result);
+      const formatedResult = Service.FormatResult(result);
       console.log("fetched datails", formatedResult);
       setCarDetails(formatedResult[0]);
     } catch (error) {
