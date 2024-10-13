@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 const OwnerDetails = ({ carDetails }) => {
   const { user } = useUser();
+  const navigate = useNavigate();
   const handleMessageOwner = async () => {
-    const navigate = useNavigate();
     // extract userid and ownerid
     const userId = user?.primaryEmailAddress.emailAddress.split("@")[0];
     const ownerId = carDetails?.createdBy?.split("@")[0];
@@ -52,8 +52,8 @@ const OwnerDetails = ({ carDetails }) => {
       );
       if (res) {
         console.log("Group Channel Created Successfully");
-        navigate("/profile?inbox='true'");
       }
+      navigate("/profile?inbox=true");
     } catch (error) {
       console.log("Error while creating channel", error.response.data.message);
     }

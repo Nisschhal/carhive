@@ -2,13 +2,18 @@ import Header from "@/components/Header";
 import MyListing from "./components/MyListing";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Inbox from "./components/Inbox";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 const Profile = () => {
   const [searchParam] = useSearchParams();
   const inbox = searchParam.get("inbox");
+  console.log(inbox);
   let active = "my-listing";
-  if (inbox) active = "inbox";
+
+  if (inbox == "true") {
+    active = "inbox";
+  }
+
   return (
     <div>
       <Header />
