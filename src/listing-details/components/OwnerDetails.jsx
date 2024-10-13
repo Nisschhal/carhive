@@ -8,18 +8,38 @@ const OwnerDetails = ({ carDetails }) => {
     // Create Current User Id
     try {
       const userId = user?.primaryEmailAddress.emailAddress.split("@")[0];
-      console.log("userid", userId);
+      console.log("userid", userId, user.fullName);
       const res = await Service.CreateSendBirdUser(
         userId,
-        user?.fullName,
+        user?.fullName || "User",
         user?.imageUrl
       );
-      console.log(res);
+      if (res) {
+        console.log("Current User id created Successully!");
+      }
     } catch (error) {
-      console.log("Error while creating current user id", error);
+      console.log(
+        "Error while creating current user id in Sendbird",
+        error.response.data.message
+      );
     }
     // Owner User Id
+    try {
+      const ownerId = carDetails?.createdBy?.split("@")[0];
+      const res = await Service.CreateSendBirdUser(
+        ownerId,
+        carDetails?.userName,
+        carDetails?.userImageUrl
+      );
+      if (res) console.log("Owner id created Successully!");
+    } catch (error) {
+      console.log(
+        "Error while creating owner userId in Sendbird",
+        error.response.data.message
+      );
+    }
     // Create Channel
+    
   };
 
   return (
