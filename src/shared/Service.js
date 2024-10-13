@@ -34,6 +34,8 @@ const FormatResult = (res) => {
   return finalResult;
 };
 
+// For creating user id
+
 const CreateSendBirdUser = (userId, nickName, profileUrl) => {
   return axios.post(
     `https://api-${sendbirdAppId}.sendbird.com/v3/users`,
@@ -51,4 +53,18 @@ const CreateSendBirdUser = (userId, nickName, profileUrl) => {
   );
 };
 
-export default { FormatResult, CreateSendBirdUser };
+// For creating group channel
+const CreateSendBirdGroupChannel = (users, title) => {
+  return axios.post(
+    `https://api-${sendbirdAppId}.sendbird.com/v3/group_channels`,
+    { user_ids: users, name: title, is_distinct: true },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        "Api-Token": sendbirdApiKey,
+      },
+    }
+  );
+};
+
+export default { FormatResult, CreateSendBirdUser, CreateSendBirdGroupChannel };

@@ -76,6 +76,8 @@ CarHive is a comprehensive car marketplace platform aimed at simplifying the pro
    - For communication api: chat messages
      - setup project
      - npm i @sendbird/uikit-react
+     - setup the required app-id and api-key
+     - create userId, ownerId, and groupChannel to chat
 
 6. **Axios**
    - For api calls: Sendbird: createUser, createGroup Channels

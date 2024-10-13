@@ -1,13 +1,18 @@
 import { Button } from "@/components/ui/button";
 import Service from "@/shared/Service";
 import { useUser } from "@clerk/clerk-react";
+import { useNavigate } from "react-router-dom";
 
 const OwnerDetails = ({ carDetails }) => {
   const { user } = useUser();
   const handleMessageOwner = async () => {
+    const navigate = useNavigate();
+    // extract userid and ownerid
+    const userId = user?.primaryEmailAddress.emailAddress.split("@")[0];
+    const ownerId = carDetails?.createdBy?.split("@")[0];
+
     // Create Current User Id
     try {
-      const userId = user?.primaryEmailAddress.emailAddress.split("@")[0];
       console.log("userid", userId, user.fullName);
       const res = await Service.CreateSendBirdUser(
         userId,
@@ -25,7 +30,6 @@ const OwnerDetails = ({ carDetails }) => {
     }
     // Owner User Id
     try {
-      const ownerId = carDetails?.createdBy?.split("@")[0];
       const res = await Service.CreateSendBirdUser(
         ownerId,
         carDetails?.userName,
@@ -39,7 +43,20 @@ const OwnerDetails = ({ carDetails }) => {
       );
     }
     // Create Channel
-    
+
+    try {
+      const users = [userId, ownerId];
+      const res = await Service.CreateSendBirdGroupChannel(
+        users,
+        carDetails?.listingTitle
+      );
+      if (res) {
+        console.log("Group Channel Created Successfully");
+        navigate("/profile?inbox='true'");
+      }
+    } catch (error) {
+      console.log("Error while creating channel", error.response.data.message);
+    }
   };
 
   return (

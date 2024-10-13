@@ -1,7 +1,7 @@
 import { useUser } from "@clerk/clerk-react";
 import { App as SendbirdApp, SendBirdProvider } from "@sendbird/uikit-react";
 import "@sendbird/uikit-react/dist/index.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Inbox = () => {
   const { user } = useUser();
@@ -24,10 +24,7 @@ const Inbox = () => {
           nickname={user?.fullName}
           profileUrl={user?.imageUrl}
           allowProfileEdit={true}
-        >
-
-          
-        </SendBirdProvider>
+        ></SendBirdProvider>
       </div>
     </div>
   );
