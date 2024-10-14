@@ -40,7 +40,7 @@
 
 1.  **Clone the repository**:
     ```bash
-    git clone https://github.com/your-username/carhive.git
+    git clone https://github.com/Nisschhal/carhive.git
     ```
 2.  **Install dependencies**:
     ```
