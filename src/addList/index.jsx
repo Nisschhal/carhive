@@ -20,6 +20,7 @@ import moment from "moment";
 import { eq } from "drizzle-orm";
 import FormatResult from "@/shared/Service";
 import Service from "@/shared/Service";
+import Footer from "@/components/Footer";
 
 const AddList = () => {
   // get the params queries if edit operation is triggered
@@ -290,6 +291,7 @@ const AddList = () => {
           </div>
         </form>
       </div>
+      <Footer />
     </div>
   );
 };

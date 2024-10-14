@@ -8,6 +8,7 @@ import { useSearchParams } from "react-router-dom";
 import FormatResult from "@/shared/Service";
 import { CarItem } from "@/components/CarItem";
 import Service from "@/shared/Service";
+import Footer from "@/components/Footer";
 
 const SearchCar = () => {
   // url params to get condition, category, price
@@ -64,6 +65,7 @@ const SearchCar = () => {
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

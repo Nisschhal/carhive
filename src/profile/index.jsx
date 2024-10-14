@@ -3,6 +3,7 @@ import MyListing from "./components/MyListing";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Inbox from "./components/Inbox";
 import { useSearchParams } from "react-router-dom";
+import Footer from "@/components/Footer";
 
 const Profile = () => {
   const [searchParam] = useSearchParams();
@@ -41,6 +42,7 @@ const Profile = () => {
           <TabsContent value="profile">Change your profile.</TabsContent>
         </Tabs>
       </div>
+      <Footer />
     </div>
   );
 };

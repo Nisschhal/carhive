@@ -1,10 +1,11 @@
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
     <footer className="bg-gray-100">
       <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="flex justify-center text-teal-600">
-          <img src="/logo.svg" alt="logo" />
+          <img src="/logo.svg" alt="logo" />{" "}
         </div>
 
         <p className="mx-auto mt-6 max-w-md font-semibold text-center leading-relaxed text-gray-500 hover:text- line-clamp-2">
@@ -16,60 +17,27 @@ const Footer = () => {
           <li>
             <a
               className="text-gray-700 transition hover:text-gray-700/75"
-              href="#"
+              href="/"
             >
-              {" "}
-              About{" "}
+              Home
             </a>
+          </li>
+
+          <li>
+            <Link
+              className="text-gray-700 transition hover:text-gray-700/75"
+              to="/search"
+            >
+              Search
+            </Link>
           </li>
 
           <li>
             <a
               className="text-gray-700 transition hover:text-gray-700/75"
-              href="#"
+              href="/#most-searched"
             >
-              {" "}
-              Careers{" "}
-            </a>
-          </li>
-
-          <li>
-            <a
-              className="text-gray-700 transition hover:text-gray-700/75"
-              href="#"
-            >
-              {" "}
-              History{" "}
-            </a>
-          </li>
-
-          <li>
-            <a
-              className="text-gray-700 transition hover:text-gray-700/75"
-              href="#"
-            >
-              {" "}
-              Services{" "}
-            </a>
-          </li>
-
-          <li>
-            <a
-              className="text-gray-700 transition hover:text-gray-700/75"
-              href="#"
-            >
-              {" "}
-              Projects{" "}
-            </a>
-          </li>
-
-          <li>
-            <a
-              className="text-gray-700 transition hover:text-gray-700/75"
-              href="#"
-            >
-              {" "}
-              Blog{" "}
+              New
             </a>
           </li>
         </ul>

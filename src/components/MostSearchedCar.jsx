@@ -9,7 +9,6 @@ import {
 import { db } from "../../config/index";
 import { CarImages, CarListing } from "../../config/schema";
 import { desc, eq } from "drizzle-orm";
-import FormatResult from "@/shared/Service";
 import { useEffect, useState } from "react";
 import Service from "@/shared/Service";
 
@@ -35,7 +34,7 @@ const MostSearchedCar = () => {
   }, []);
 
   return (
-    <div className="mx-24">
+    <div className="mx-24" id="most-searched">
       {/* Header */}
       <h2 className="text-3xl font-bold text-center mb-16">
         Most Searched Car

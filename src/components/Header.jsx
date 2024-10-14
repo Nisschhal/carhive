@@ -22,18 +22,22 @@ const Header = () => {
       {/* Nav  */}
       <nav className="flex justify-center mx-auto">
         <ul className="hidden md:flex  gap-16  ">
-          <li className="font-medium hover:scale-105 transition-all cursor-pointer hover:text-primary">
-            Home
-          </li>
-          <li className="font-medium hover:scale-105 transition-all cursor-pointer hover:text-primary">
-            Search
-          </li>
-          <li className="font-medium hover:scale-105 transition-all cursor-pointer hover:text-primary">
-            New
-          </li>
-          <li className="font-medium hover:scale-105 transition-all cursor-pointer hover:text-primary">
-            Preowned
-          </li>
+          <Link to="/">
+            <li className="font-medium hover:scale-105 transition-all cursor-pointer hover:text-primary">
+              Home
+            </li>
+          </Link>
+          <Link to="/search">
+            <li className="font-medium hover:scale-105 transition-all cursor-pointer hover:text-primary">
+              Search
+            </li>
+          </Link>
+
+          <a href="/#most-searched">
+            <li className="font-medium hover:scale-105 transition-all cursor-pointer hover:text-primary">
+              New
+            </li>
+          </a>
         </ul>
       </nav>
 
