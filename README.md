@@ -1,104 +1,117 @@
-# CARHIVE
+# CarHive
 
-CarHive is a comprehensive car marketplace platform aimed at simplifying the process of buying and selling vehicles. This project leverages modern frontend and backend technologies to deliver a seamless user experience and robust data management.
+**CarHive** is a comprehensive car marketplace platform aimed at streamlining the process of buying and selling vehicles. The project integrates modern frontend and backend technologies to offer a smooth user experience and efficient data management.
 
-## Dependencies
+## Features
+
+- **User Authentication**: Modal-based sign-in experience using Clerk.
+- **Image Management**: Image storage with Firebase.
+- **Database**: Serverless PostgreSQL via Neon, managed using Drizzle ORM.
+- **Responsive UI**: TailwindCSS and Shadcn for styling and component management.
+- **Real-time Chat**: Integrated chat using Sendbird for seamless communication between buyers and sellers.
+
+## Technologies Used
 
 ### Frontend
 
-1. **Vite**  
-   Utilized for fast project setup and optimized build processes.
-
-2. **TailwindCSS**  
-   Integrated for quick and efficient styling. Follow all necessary setup procedures before adding `shadcn` for fast custom components.
-
-3. **Shadcn**  
-   Added with Vite for fast and customizable component generation.
-
-4. **React Router Dom**  
-   Used for managing routing across different pages efficiently.
-
-5. **Clerk for Authentication**  
-   Clerk is integrated to handle authentication with a modal sign-in experience. Example implementation:
-
-   ```jsx
-   import { SignInButton } from "@clerk/clerk-react";
-
-   <SignInButton mode="modal">
-     <Button>Login</Button>
-   </SignInButton>;
-   ```
-
-6. **React Icons**  
-   Used for seamless icon integration throughout the UI.
-
-7. **Moment.js** Get the current data and time with formats.
-
-### Resources
-
-- **Untitled UI**: for logo inspiration and branding.
-- **Flaticon**: for additional icons and visual elements.
-- **HyperUI.dev**: for pre-built TailwindCSS components.
-
----
+- **[Vite](https://vitejs.dev/)**: Fast build and development setup.
+- **[React](https://reactjs.org/)**: Modern JavaScript library for building user interfaces.
+- **[TailwindCSS](https://tailwindcss.com/)**: Utility-first CSS framework for quick UI design.
+- **[Shadcn](https://shadcn.dev/)**: Fast, customizable components with TailwindCSS.
+- **[React Router](https://reactrouter.com/)**: Declarative routing for React applications.
+- **[Clerk](https://clerk.dev/)**: Authentication service for seamless sign-in and user management.
+- **[React Icons](https://react-icons.github.io/react-icons/)**: Simple inclusion of icons in React apps.
 
 ### Backend
 
-1. **Firebase (for Image Storage)**  
-   Firebase is used for storing and managing uploaded images:
+- **[Firebase](https://firebase.google.com/)**: Used for image uploads and management.
+- **[PostgreSQL](https://www.postgresql.org/)**: Powerful, open-source relational database.
+- **[Drizzle ORM](https://github.com/drizzle-team/drizzle-orm)**: Type-safe SQL ORM for Postgres with a minimalist approach.
+- **[Neon](https://neon.tech/)**: Serverless Postgres platform for managing the database.
+- **[Sendbird](https://sendbird.com/)**: API for implementing real-time chat functionality.
+- **[Axios](https://axios-http.com/)**: HTTP client for making API calls to Sendbird.
 
-   - Create and register a Firebase project.
-   - Install and add Firebase config to the source code to set up the integration.
+### DevOps & Deployment
 
-2. **PostgreSQL with Drizzle ORM (Database)**
+- **[GitHub](https://github.com/)**: For version control and repository hosting.
+- **[Vercel](https://vercel.com/)**: For deployment of the frontend and backend services.
 
-   - **PostgreSQL** is used for data storage, integrated with the **Drizzle ORM** for streamlined interaction.
-   - **Neon** is used as a serverless database manager for PostgreSQL:
-     - Create a Neon account and set up a project to obtain the necessary keys and database host.
-     - Follow the PostgreSQL documentation to integrate with Drizzle.
-     - Configure `drizzle.config.js` to manage database schema creation and data manipulation.
+## Installation and Setup
 
-3. **Firebase for Image Storage**  
-   Image uploads are managed using Firebase storage:
+1.  **Clone the repository**:
+    ```bash
+    git clone https://github.com/your-username/carhive.git
+    ```
+2.  **Install dependencies**:
+    ```
+    npm install
+    ```
+3.  **Set Up Environment Variables**:
 
-   - Configure Firebase as per documentation.
-   - Use Firebase storage `ref` to reference the files.
-   - Upload files using `uploadBytes(ref, file, metadata)` and access them via `getDownloadURL(ref)`.
+    To run this project, you will need to add the following environment variables to your `.env.local` file:
 
-   _Note: Ensure that Firebase storage rules allow read and write access, or it will throw CORS errors._
+    ```bash
+    VITE_CLERK_PUBLISHABLE_KEY=<your-clerk-publishable-key>
+    VITE_DRIZZLE_DATABASE_URL=<your-postgres-database-url>
+    VITE_FIREBASE_API_KEY=<your-firebase-api-key>
+    VITE_SENDBIRD_APP_ID=<your-sendbird-app-id>
+    VITE_SENDBIRD_API_KEY=<your-sendbird-api-key>
+    ```
 
-4. **CRUD Operations**
+    _**Note**: Never share your environment variables publicly or commit them to the repository. Use .gitignore to ensure the .env.local file is not tracked._
 
-   - Drizzle orm to _`\_insert()_, _select(), \_update()_, and _delete()_`\_
+## How It Works
 
-5. **SendBrid**
+- ### Authentication
 
-   - For communication api: chat messages
-     - setup project
-     - npm i @sendbird/uikit-react
-     - setup the required app-id and api-key
-     - create userId, ownerId, and groupChannel to chat
+Clerk manages the entire user authentication process, including sign-up, login, and session management.
 
-6. **Axios**
+- ### Image Management
 
-   - For api calls: Sendbird: createUser, createGroup Channels
+Firebase handles the storage of images, ensuring scalable and secure media management.
 
-7. **Github**
+- ### Database
 
-   - For project repository
+PostgreSQL combined with Drizzle ORM manages the database operations, including vehicle listings, user data, and transactions.
 
-8. **Vercel**
-   - For Project deployment
+- ### Real-time Communication
 
----
+Sendbird provides a chat API for real-time messaging between users (buyers and sellers).
+
+- ## Project Structure
+
+```bash
+/src                  # React, Tailwind, Shadcn UI for the frontend
+/drizzle.config.js     # Drizzle ORM configuration for database schema and migrations
+/.env.local            # Environment variables (not included in repo)
+```
 
 ## Learning Outcomes
 
-Throughout this project, I have gained valuable experience with:
+During the development of CarHive, I gained experience in:
 
-- Implementing authentication services using Clerk.
-- Managing routing and state transitions with `react-router-dom`.
-- Working with serverless databases like Neon and PostgreSQL.
-- Handling file uploads and storage with Firebase, combined with creating scalable user interfaces using `shadcn` and `tailwindcss`.
+- Integrating modern authentication solutions with Clerk.
+- Managing routing, state transitions, and API integration with React Router and Axios.
+- Working with serverless database solutions like Neon and PostgreSQL.
+- Implementing real-time communication using Sendbird.
+- Utilizing Firebase for scalable image storage and management.
 
-CarHive showcases the potential of combining modern web development technologies to create a scalable, secure, and efficient marketplace platform.
+## Deployment
+
+The application is deployed using Vercel, which handles both frontend and backend hosting.
+
+## Contributions
+
+Feel free to fork this repository, submit issues, or make pull requests to improve this project further.
+
+### Contribution Guidelines
+
+- Fork the project and create a branch (feature-branch).
+- Commit your changes.
+- Push your branch to the remote repository.
+- Submit a Pull Request.
+- Please make sure to update tests as appropriate.
+
+---
+
+## Thank you for checking out CarHive! If you have any questions, feel free to reach out. (mrnischalpuri@gmail.com)
