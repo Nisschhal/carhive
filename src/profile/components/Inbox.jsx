@@ -11,6 +11,7 @@ const Inbox = () => {
 
   const [userId, setUserId] = useState();
 
+  // get the userId to setup group channel bwetween owner and current user
   useEffect(() => {
     if (user) {
       const userId = user?.primaryEmailAddress?.emailAddress.split("@")[0];
@@ -18,22 +19,24 @@ const Inbox = () => {
     }
   }, [user]);
 
+  // storage for group channel
   const [channelUrl, setChannelUrl] = useState();
 
   return (
-    <div>
-      <div className="w-full h-screen">
+    <>
+      <div className="w-full h-[580px]">
         <SendBirdProvider
           appId={import.meta.env.VITE_SENDBIRD_APP_ID}
           userId={userId}
           nickname={user?.fullName}
           profileUrl={user?.imageUrl}
           allowProfileEdit={true}
+          className=""
         >
           {/* GRID: Chat list, col 30% || chat area: 70% */}
-          <div className="h-full grid grid-cols-1 md:grid-cols-3">
+          <div className="h-full grid grid-cols-1 md:grid-cols-3 gap-4 ">
             {/* Chat list */}
-            <div className="md:col-span-1">
+            <div className=" p-5  border shadow-lg  md:col-span-1 ">
               <GroupChannelList
                 onChannelSelect={(channel) => setChannelUrl(channel?.url)}
                 channelListQueryParams={{
@@ -41,14 +44,14 @@ const Inbox = () => {
                 }}
               />
             </div>
-            <div className="md:col-span-2">
+            <div className="md:col-span-2 w-full  ">
               <GroupChannel channelUrl={channelUrl} />
             </div>
           </div>
           {/* Chat box */}
         </SendBirdProvider>
       </div>
-    </div>
+    </>
   );
 };
 
