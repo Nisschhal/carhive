@@ -80,7 +80,15 @@ CarHive is a comprehensive car marketplace platform aimed at simplifying the pro
      - create userId, ownerId, and groupChannel to chat
 
 6. **Axios**
+
    - For api calls: Sendbird: createUser, createGroup Channels
+
+7. **Github**
+
+   - For project repository
+
+8. **Vercel**
+   - For Project deployment
 
 ---
 
