@@ -21,7 +21,7 @@ const Profile = () => {
       {/* Listing and Add Button */}
       <div className="px-10 md:px-20 my-10">
         {/* Tabs */}
-        <Tabs defaultValue={active} className="border w-full">
+        <Tabs defaultValue={active} className=" w-full">
           <TabsList className="w-full flex justify-start">
             <TabsTrigger value="my-listing" className="text-base">
               MyListing

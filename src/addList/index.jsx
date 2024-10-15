@@ -18,7 +18,6 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
 import moment from "moment";
 import { eq } from "drizzle-orm";
-import FormatResult from "@/shared/Service";
 import Service from "@/shared/Service";
 import Footer from "@/components/Footer";
 
